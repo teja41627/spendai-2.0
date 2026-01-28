@@ -1,0 +1,406 @@
+.project-detail-page {
+    min-height: 100vh;
+    background: var(--background);
+}
+
+/* Project Detail Header */
+.project-detail-header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: var(--spacing-lg) 0;
+}
+
+.project-detail-header-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+.project-detail-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.breadcrumb-link {
+    color: var(--primary);
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.breadcrumb-link:hover {
+    color: var(--secondary);
+}
+
+.project-detail-title-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.project-detail-title {
+    font-size: 2rem;
+    margin: 0;
+}
+
+/* Project Detail Main */
+.project-detail-main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: var(--spacing-xl) var(--spacing-md);
+}
+
+/* Project Info Card */
+.project-info-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.project-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.project-info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.project-info-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-secondary);
+}
+
+.project-info-value {
+    font-size: 1rem;
+    color: var(--text-primary);
+}
+
+.project-info-item.budget-span {
+    grid-column: 1 / -1;
+    margin-top: var(--spacing-sm);
+    padding-top: var(--spacing-sm);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.budget-progress-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.budget-progress-bar {
+    height: 8px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.budget-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #6366f1, #818cf8);
+    border-radius: 999px;
+    transition: width 0.3s ease-out;
+}
+
+.budget-progress-fill.exceeded {
+    background: linear-gradient(90deg, #ef4444, #f87171);
+}
+
+.budget-progress-text {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+/* Proxy Keys Section */
+.proxy-keys-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+}
+
+.proxy-keys-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--border);
+}
+
+.proxy-keys-title {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.proxy-keys-stats {
+    display: flex;
+    gap: var(--spacing-md);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.stat-value {
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+/* Keys List */
+.proxy-keys-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.proxy-key-item {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s;
+}
+
+.proxy-key-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--primary);
+}
+
+.proxy-key-item.revoked {
+    opacity: 0.6;
+    background: rgba(239, 68, 68, 0.05);
+}
+
+.proxy-key-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.proxy-key-name {
+    font-weight: 600;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.key-status-badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.key-status-badge.active {
+    background: rgba(34, 197, 94, 0.2);
+    color: rgb(34, 197, 94);
+}
+
+.key-status-badge.revoked {
+    background: rgba(239, 68, 68, 0.2);
+    color: var(--error);
+}
+
+.proxy-key-value {
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.copy-icon {
+    font-size: 0.85rem;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.proxy-key-value:hover .copy-icon {
+    opacity: 1;
+}
+
+.proxy-key-meta {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.proxy-key-actions {
+    display: flex;
+    gap: var(--spacing-xs);
+}
+
+.key-action-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+}
+
+.key-action-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--primary);
+    color: var(--text-primary);
+}
+
+.key-action-btn.revoke:hover {
+    border-color: var(--error);
+    color: var(--error);
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.key-action-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Empty State */
+.proxy-keys-empty {
+    text-align: center;
+    padding: var(--spacing-xl);
+    color: var(--text-secondary);
+}
+
+.proxy-keys-empty-icon {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-md);
+    opacity: 0.5;
+}
+
+/* New Key Display */
+.new-key-display {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
+    border: 2px solid var(--primary);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+}
+
+.new-key-warning {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+    color: var(--warning);
+    font-weight: 600;
+}
+
+.new-key-value-display {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    font-family: 'Courier New', monospace;
+    font-size: 0.95rem;
+    word-break: break-all;
+    margin-bottom: var(--spacing-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.new-key-value-text {
+    flex: 1;
+    user-select: all;
+}
+
+.copy-key-btn {
+    background: var(--primary);
+    border: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.copy-key-btn:hover {
+    background: var(--secondary);
+    transform: scale(1.05);
+}
+
+.copy-key-btn.copied {
+    background: var(--success);
+}
+
+.new-key-note {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .project-detail-title-section {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-md);
+    }
+
+    .project-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .proxy-keys-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-md);
+    }
+
+    .proxy-key-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-md);
+    }
+
+    .proxy-key-actions {
+        width: 100%;
+    }
+
+    .key-action-btn {
+        flex: 1;
+    }
+
+    .new-key-value-display {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .copy-key-btn {
+        width: 100%;
+    }
+}

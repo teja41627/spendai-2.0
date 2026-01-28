@@ -1,0 +1,219 @@
+/* BudgetSettings.css */
+
+.container.narrow {
+    max-width: 800px;
+}
+
+.page-header {
+    margin-bottom: 2.5rem;
+}
+
+.page-header h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+}
+
+.page-header p {
+    color: #94a3b8;
+    font-size: 1.125rem;
+}
+
+.info-box-large {
+    display: flex;
+    gap: 1.5rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(30, 41, 59, 0.4));
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    border-radius: 1rem;
+    margin-bottom: 2.5rem;
+}
+
+.info-content h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #818cf8;
+}
+
+.info-content p {
+    font-size: 0.9375rem;
+    color: #94a3b8;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.settings-section {
+    padding: 2.5rem;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+}
+
+.section-header {
+    margin-bottom: 2rem;
+}
+
+.section-header h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.section-header p {
+    color: #94a3b8;
+    font-size: 0.9375rem;
+}
+
+/* Global Form */
+.form-group-inline {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.input-prefix {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #94a3b8;
+}
+
+.input-large {
+    flex: 1;
+    background-color: rgba(15, 23, 42, 0.5);
+    border: 1px solid #334155;
+    border-radius: 0.75rem;
+    padding: 0.875rem 1.25rem;
+    color: #f8fafc;
+    font-size: 1.25rem;
+    font-weight: 600;
+    transition: border-color 0.2s;
+}
+
+.input-large:focus {
+    outline: none;
+    border-color: #6366f1;
+}
+
+/* Project List */
+.project-budget-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.project-budget-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem;
+    background-color: rgba(255, 255, 255, 0.03);
+    border-radius: 0.75rem;
+    border: 1px solid rgba(51, 65, 85, 0.5);
+}
+
+.pbi-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.pbi-name {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.pbi-id {
+    font-size: 0.75rem;
+    color: #64748b;
+    font-family: monospace;
+}
+
+.pbi-action {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.input-prefix-sm {
+    font-weight: 600;
+    color: #64748b;
+}
+
+.pbi-action input {
+    width: 120px;
+    background-color: rgba(15, 23, 42, 0.5);
+    border: 1px solid #334155;
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    color: #f8fafc;
+    font-weight: 600;
+}
+
+/* Thresholds */
+.threshold-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.threshold-item {
+    padding: 1rem;
+    background-color: rgba(30, 41, 59, 0.5);
+    border: 1px solid #334155;
+    border-radius: 0.75rem;
+    text-align: center;
+    font-weight: 700;
+    color: #94a3b8;
+}
+
+.threshold-item.total {
+    background-color: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.3);
+    color: #f87171;
+}
+
+.info-box {
+    display: flex;
+    gap: 1rem;
+    padding: 1.25rem;
+    background-color: rgba(99, 102, 241, 0.05);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    border-radius: 0.75rem;
+}
+
+.info-icon {
+    font-size: 1.25rem;
+}
+
+.info-box p {
+    font-size: 0.875rem;
+    color: #94a3b8;
+    line-height: 1.5;
+}
+
+.hint {
+    font-size: 0.8125rem;
+    color: #64748b;
+    margin-top: 0.75rem;
+}
+
+@media (max-width: 640px) {
+    .form-group-inline {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .project-budget-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .pbi-action {
+        width: 100%;
+    }
+
+    .pbi-action input {
+        flex: 1;
+    }
+}

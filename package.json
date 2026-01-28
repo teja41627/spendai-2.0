@@ -1,0 +1,14 @@
+{
+    "name": "spendai-root",
+    "version": "1.0.0",
+    "description": "SpendAI 2.0 - Root Management",
+    "scripts": {
+        "dev:backend": "npm --prefix backend run dev",
+        "dev:frontend": "npm --prefix frontend run dev",
+        "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+        "install:all": "npm install && npm --prefix backend install && npm --prefix frontend install"
+    },
+    "devDependencies": {
+        "concurrently": "^8.2.2"
+    }
+}
