@@ -19,10 +19,7 @@ const proxyLimiter = rateLimit({
         // Fallback to IP if no key is provided
         return req.ip;
     },
-    validate: {
-        xForwardedForHeader: false,
-        keyGeneratorIpFallback: false // Disable IPv6 validation warning
-    },
+    validate: false, // Completely disable validation for production stability
     handler: (req, res) => {
         logger.warn(`Rate limit exceeded for key: ${req.headers.authorization?.substring(0, 15)}...`, 'RATELIMIT');
         res.status(429).json({

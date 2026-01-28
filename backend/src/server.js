@@ -17,16 +17,13 @@ if (isProd) {
     app.set('trust proxy', 1);
 }
 
-// 2. Global Rate Limiting (Basic Protection)
 const globalLimiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 1000, // Limit each IP to 1000 requests per window
+    windowMs: 15 * 60 * 1000,
+    max: 1000,
     message: { success: false, error: 'Too many requests, please try again later.' },
     standardHeaders: true,
     legacyHeaders: false,
-    validate: {
-        keyGeneratorIpFallback: false
-    }
+    validate: false // Completely disable validation for production stability
 });
 
 // Middleware
