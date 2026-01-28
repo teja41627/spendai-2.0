@@ -96,9 +96,16 @@ app.use((err, req, res, next) => {
 });
 
 // Start server
-app.listen(PORT, () => {
+const server = app.listen(PORT, '0.0.0.0', () => {
     logger.info(`SpendAI Server started on port ${PORT}`, 'STARTUP');
     logger.info(`Environment: ${process.env.NODE_ENV}`, 'STARTUP');
+    logger.info(`Server listening on 0.0.0.0:${PORT}`, 'STARTUP');
+});
+
+// Handle server errors
+server.on('error', (err) => {
+    logger.error(`Server failed to start: ${err.message}`, 'STARTUP');
+    process.exit(1);
 });
 
 module.exports = app;

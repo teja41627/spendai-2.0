@@ -1,0 +1,25 @@
+{
+    "builds": [
+        {
+            "src": "frontend/package.json",
+            "use": "@vercel/static-build",
+            "config": {
+                "distDir": "dist"
+            }
+        }
+    ],
+    "routes": [
+        {
+            "src": "/api/(.*)",
+            "dest": "https://spendai-20-production.up.railway.app/api/$1"
+        },
+        {
+            "src": "/v1/(.*)",
+            "dest": "https://spendai-20-production.up.railway.app/v1/$1"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "/index.html"
+        }
+    ]
+}
