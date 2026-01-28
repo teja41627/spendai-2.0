@@ -1,0 +1,16 @@
+{
+  "phases": {
+    "setup": {
+      "nixPkgs": ["nodejs-18_x"]
+    },
+    "install": {
+      "cmds": ["cd backend && npm ci --production"]
+    },
+    "build": {
+      "cmds": []
+    }
+  },
+  "start": {
+    "cmd": "cd backend && node src/server.js"
+  }
+}
