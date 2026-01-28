@@ -39,11 +39,17 @@ app.use((req, res, next) => {
 });
 
 // 4. Production Health Checks
+app.get('/', (req, res) => {
+    res.json({ message: 'SpendAI Backend API is live', environment: process.env.NODE_ENV });
+});
+
 app.get('/health', (req, res) => {
+    logger.info('Health check requested', 'HEALTH');
     res.json({
         status: 'ok',
         uptime: process.uptime(),
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        node_version: process.version
     });
 });
 
