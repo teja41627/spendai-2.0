@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "description": "SpendAI 2.0 - Root Management",
     "scripts": {
+        "start": "npm --prefix backend start",
         "dev:backend": "npm --prefix backend run dev",
         "dev:frontend": "npm --prefix frontend run dev",
         "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
