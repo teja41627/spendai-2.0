@@ -12,6 +12,11 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 const isProd = process.env.NODE_ENV === 'production';
 
+// Enable trust proxy for Railway/Vercel (required for rate limiting)
+if (isProd) {
+    app.set('trust proxy', 1);
+}
+
 // 2. Global Rate Limiting (Basic Protection)
 const globalLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
@@ -19,6 +24,9 @@ const globalLimiter = rateLimit({
     message: { success: false, error: 'Too many requests, please try again later.' },
     standardHeaders: true,
     legacyHeaders: false,
+    validate: {
+        keyGeneratorIpFallback: false
+    }
 });
 
 // Middleware
