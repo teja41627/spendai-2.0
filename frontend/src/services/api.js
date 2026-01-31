@@ -2,8 +2,7 @@ import axios from 'axios';
 import { createClient } from '@supabase/supabase-js';
 
 // Initialize Supabase client for frontend auth
-// NOTE: Updated to the project ID found in your redirect token (wleijjjfnbpnnpacmqigr)
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://wleijjjfnbpnnpacmqigr.supabase.co';
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://jexipkocsmrqdzomqddy.supabase.co';
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
