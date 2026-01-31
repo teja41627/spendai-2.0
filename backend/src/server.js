@@ -65,6 +65,7 @@ const proxyKeyRoutes = require('./routes/proxyKeys');
 const openaiProxyRoutes = require('./routes/openaiProxy');
 const analyticsRoutes = require('./routes/analytics');
 const budgetRoutes = require('./routes/budgets');
+const diagnosticRoutes = require('./routes/diagnostics');
 
 // API Routes
 app.use('/api/auth', authRoutes);
@@ -72,6 +73,7 @@ app.use('/api/projects', projectRoutes);
 app.use('/api/proxy-keys', proxyKeyRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/budgets', budgetRoutes);
+app.use('/api/diagnostics', diagnosticRoutes);
 
 // OpenAI Proxy Routes (OpenAI-compatible endpoints)
 app.use('/v1', openaiProxyRoutes);
@@ -112,6 +114,11 @@ const server = app.listen(PORT, '0.0.0.0', () => {
 server.on('error', (err) => {
     logger.error(`Server failed to start: ${err.message}`, 'STARTUP');
     process.exit(1);
+});
+
+// Handle unhandled rejections (e.g. Supabase connection timeouts)
+process.on('unhandledRejection', (reason, promise) => {
+    logger.error(`Unhandled Rejection at: ${promise}, reason: ${reason}`, 'LIFECYCLE');
 });
 
 module.exports = app;
