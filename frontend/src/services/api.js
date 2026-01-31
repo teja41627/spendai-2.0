@@ -2,9 +2,24 @@ import axios from 'axios';
 import { createClient } from '@supabase/supabase-js';
 
 // Initialize Supabase client for frontend auth
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+// NOTE: Updated to the project ID found in your redirect token (wleijjjfnbpnnpacmqigr)
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://wleijjjfnbpnnpacmqigr.supabase.co';
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+// Listen for auth changes to sync our manually managed localStorage
+supabase.auth.onAuthStateChange((event, session) => {
+    console.log('Auth event change:', event);
+    if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED' || event === 'USER_UPDATED') {
+        if (session) {
+            localStorage.setItem('accessToken', session.access_token);
+            // We don't have the user profile yet, getCurrentUser in Dashboard will fetch it
+        }
+    } else if (event === 'SIGNED_OUT') {
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('user');
+    }
+});
 
 const API_URL = import.meta.env.VITE_API_BASE_URL || '';
 
@@ -101,7 +116,9 @@ export const authService = {
      * Check if user is authenticated
      */
     isAuthenticated() {
-        return !!localStorage.getItem('accessToken');
+        // Check hash if we just landed from OAuth
+        const hasHashToken = window.location.hash.includes('access_token');
+        return !!localStorage.getItem('accessToken') || hasHashToken;
     },
 
     /**
