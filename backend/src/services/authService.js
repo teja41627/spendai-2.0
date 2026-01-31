@@ -169,22 +169,58 @@ class AuthService {
             }
 
             // Get user profile
-            const { data: userData, error: userError } = await supabaseAdmin
+            let { data: userData, error: userError } = await supabaseAdmin
                 .from('users')
                 .select(`
-          id,
-          email,
-          role,
-          organization_id,
-          organizations:organization_id (
-            id,
-            name
-          )
-        `)
+                    id,
+                    email,
+                    role,
+                    organization_id,
+                    organizations:organization_id (
+                        id,
+                        name
+                    )
+                `)
                 .eq('id', user.id)
-                .single();
+                .maybeSingle();
 
-            if (userError) {
+            // JIT Provisioning: If user exists in Auth but not in our 'users' table (common with social login)
+            if (!userData && !userError) {
+                console.log(`JIT Provisioning new social user: ${user.email}`);
+
+                // 1. Create a default personal organization
+                const { data: orgData, error: orgErr } = await supabaseAdmin
+                    .from('organizations')
+                    .insert({ name: `${user.email.split('@')[0]}'s Org` })
+                    .select()
+                    .single();
+
+                if (orgErr) throw orgErr;
+
+                // 2. Create the user profile
+                const { data: newProfile, error: profileErr } = await supabaseAdmin
+                    .from('users')
+                    .insert({
+                        id: user.id,
+                        email: user.email,
+                        organization_id: orgData.id,
+                        role: 'admin'
+                    })
+                    .select(`
+                        id,
+                        email,
+                        role,
+                        organization_id,
+                        organizations:organization_id (
+                            id,
+                            name
+                        )
+                    `)
+                    .single();
+
+                if (profileErr) throw profileErr;
+                userData = newProfile;
+            } else if (userError) {
                 throw new Error(`User profile error: ${userError.message}`);
             }
 

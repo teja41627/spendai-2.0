@@ -1,4 +1,10 @@
 import axios from 'axios';
+import { createClient } from '@supabase/supabase-js';
+
+// Initialize Supabase client for frontend auth
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 const API_URL = import.meta.env.VITE_API_BASE_URL || '';
 
@@ -104,6 +110,22 @@ export const authService = {
     getUser() {
         const userStr = localStorage.getItem('user');
         return userStr ? JSON.parse(userStr) : null;
+    },
+
+    /**
+     * Log in with Google OAuth
+     */
+    async loginWithGoogle() {
+        return await supabase.auth.signInWithOAuth({
+            provider: 'google',
+            options: {
+                redirectTo: `${window.location.origin}/dashboard`,
+                queryParams: {
+                    access_type: 'offline',
+                    prompt: 'consensus'
+                }
+            }
+        });
     }
 };
 

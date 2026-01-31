@@ -28,14 +28,33 @@ function Dashboard() {
                 return;
             }
 
-            const userData = authService.getUser();
-            setUser(userData);
-
             try {
+                // If we're coming from a social redirect, we might need to refresh the profile
+                const { user: refreshedUser } = await authService.getCurrentUser();
+                if (refreshedUser) {
+                    localStorage.setItem('user', JSON.stringify({
+                        id: refreshedUser.id,
+                        email: refreshedUser.email,
+                        role: refreshedUser.role,
+                        organization: refreshedUser.organization
+                    }));
+                    setUser(refreshedUser);
+                } else {
+                    const userData = authService.getUser();
+                    setUser(userData);
+                }
+
                 await fetchAnalytics();
             } catch (err) {
-                console.error('Analytics Fetch Error:', err);
-                setError('Failed to load spend data. Please try again later.');
+                console.error('Initialization Error:', err);
+                // Fallback to local storage if API fails but user is still auth'd
+                const userData = authService.getUser();
+                if (userData) {
+                    setUser(userData);
+                } else {
+                    navigate('/login');
+                }
+                setError('Failed to load profile or spend data.');
             } finally {
                 setLoading(false);
             }
